@@ -1,15 +1,28 @@
+import sys
+sys.path.append(".")
+sys.path.append("..")
+
+
 from visual_sort.my_thing import *
 
 
 class SelectionSort(Scene):
     # 播放速度 秒
-    inner_duration = 0.01
+    inner_duration = 0.0000000001
+
+    # with open("d2.txt", "r") as f:
+    #     arr = [int(float(line) * 1000) for line in f]
+
+    with open("d2.txt", "r") as f:
+        arr = [int(line) for line in f]
+
+
+    print(arr)
 
     def construct(self) -> None:
-        # arr不能有0和负数
-        arr = [7, 9, 8, 4, 3, 2, 1, 5]
 
-        rect_list = VisualArr(arr)
+
+        rect_list = VisualArr(self.arr)
 
         self.add(rect_list)
 
@@ -59,7 +72,7 @@ class SelectionSort(Scene):
 
                 rect_list[min_index].animate.shift(LEFT * (cooa - coob)),
                 rect_list[i].animate.shift(RIGHT * (cooa - coob)),
-                run_time=1
+                run_time=self.inner_duration
             )
 
             # 位置i已经不用管了, 把它恢复颜色
